@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="new_file.css">
+    <meta charset="UTF-8">
+    <title>社区一站式智慧服务平台</title>
+    <style>
+
+        .loading-screen{
+            width: 100%;
+            height: 100vh;
+            background-color: #7bed9f;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+        }
+        .loading-screen::before{
+            content: "";
+            position: relative;
+            left: 20%;
+            width: 6rem;
+            height: 6rem;
+            background-color: #ffa502;
+            border-radius: 1.5rem;
+            transform: translateX(-50%) rotate(0);
+            animation: loading 4s infinite linear;
+        }
+        @keyframes loading{
+            50%{
+                left: 80%;
+            }
+            to{
+                transform: translateX(-50%) rotate(1440deg);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="layui/layui.js" type="text/javascript" charset="UTF-8"></script>
+</head>
+<body>
+<div>
+    <ul class="layui-nav" lay-filter="">
+        <li class="layui-nav-item">
+            <a href="javascript:;">设置</a>
+            <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                <dd><a href="login.html">退出</a></dd>
+                <dd><a href="Main_new.html">返回</a></dd>
+                <dd><a href="Main_my.html">修改密码</a></dd>
+            </dl>
+        </li>
+    </ul>
+    <div class="layui-row">
+        <div class="layui-col-md3">
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">菜单</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="Main_new.html">信息展览馆</a></dd>
+                        <dd><a href="talk.html">互助咨询</a></dd>
+                        <dd><a href="Main_xx.html">休息一下</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">我的</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="Main_b.html">建议分布</a></dd>
+                        <dd><a href="Main.html">社区建议箱</a></dd>
+                        <dd><a href="introduce.html">社区建议展览</a> </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="ceshi4.html">垃圾自动分类</a></li>
+                <li class="layui-nav-item"><a href="">客服邮箱</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="layui-col-md9">
+                <span id="p10">全部建议展示表</span><br/><br/>
+                <div class="f6_4">
+                    选择要查询的建议类别，然点击开始查询按钮，结果会以表格的形式渲染在下方
+                </div>
+                <br/><select id="choice">
+                <option value="traffic">交通类</option>
+                <option value="serve">服务类</option>
+                <option value="safe">安全类</option>
+                <option value="acti">活动类</option>
+                <option value="beaf">美化类</option>
+                <option value="Maintain">权益类</option>
+                <option value="play">娱乐类</option>
+                <option value="elseL">其他类</option>
+            </select>
+                <button id="cho">开始查询</button>
+                <div id="ap">
+                    <table class="layui-table" id="table">
+                        <colgroup>
+                            <col width="150">
+                            <col width="200">
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>{{min}}</th>
+                        </tr>
+                        <thead v-for="(mainInf,i) in MainAll">
+                        <tr>
+                            <th>{{mainInf}}</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="loading-screen" style="height: 100%;width: 100%;"></div>
+<div class="loading-screen" style="height: 100%;width: 100%;"></div>
+<div class="loading-screen" style="height: 100%;width: 100%;"></div>
+<div class="loading-screen" style="height: 100%;width: 100%;"></div>
+</div>
+</body>
+<script src="axios.js"></script>
+<script src="vue/vue.js"></script>
+<script>
+    new Vue({
+        el: "#ap",
+        data(){
+            return{
+                MainAll : [],
+                min : "",
+                min_1 : "交通类",
+                min_2 : "服务类",
+                min_3 : "安全类",
+                min_4 : "活动类",
+                min_5 : "美化类",
+                min_6 : "权益类",
+                min_7 : "娱乐类",
+                min_8 : "其他类"
+            }
+        },
+        mounted(){
+            var _this = this;
+            document.getElementById("cho").addEventListener('click',function(){
+                    var sel = document.getElementById("choice");
+                    var val = sel.options[sel.selectedIndex].value;
+                    console.log(val);
+                    axios({
+                        //箭头函数
+                        method:"get",
+                        // 这个url是获取表单数据
+                        url:"http://localhost:8080/tomcat-damo1/SuggestShowServlet?choice="+val
+                    }).then(function (resp) {
+                        _this.MainAll = resp.data;
+                        console.log(_this.MainAll[0]);
+                        if(val === "traffic"){
+                            _this.min = _this.min_1;
+                        }
+                        if(val === "serve"){
+                            _this.min = _this.min_2;
+                        }
+                        if(val === "safe"){
+                            _this.min = _this.min_3;
+                        }
+                        if(val === "acti"){
+                            _this.min = _this.min_4;
+                        }
+                        if(val === "beaf"){
+                            _this.min = _this.min_5;
+                        }
+                        if(val === "Maintain"){
+                            _this.min = _this.min_6;
+                        }
+                        if(val === "play"){
+                            _this.min = _this.min_7;
+                        }
+                        if(val === "elseL"){
+                            _this.min = _this.min_8;
+                        }
+                    })
+                }
+                ,false);
+        },
+    })
+</script>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="new_file.css">
+    <meta charset="UTF-8">
+    <title>社区一站式智慧服务平台</title>
+    <style>
+
+        .loading-screen{
+            width: 100%;
+            height: 100vh;
+            background-color: #7bed9f;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+        }
+        .loading-screen::before{
+            content: "";
+            position: relative;
+            left: 20%;
+            width: 6rem;
+            height: 6rem;
+            background-color: #ffa502;
+            border-radius: 1.5rem;
+            transform: translateX(-50%) rotate(0);
+            animation: loading 4s infinite linear;
+        }
+        @keyframes loading{
+            50%{
+                left: 80%;
+            }
+            to{
+                transform: translateX(-50%) rotate(1440deg);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="layui/layui.js" type="text/javascript" charset="UTF-8"></script>
+</head>
+<body>
+<div>
+    <ul class="layui-nav" lay-filter="">
+        <li class="layui-nav-item">
+            <a href="javascript:;">设置</a>
+            <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                <dd><a href="login.html">退出</a></dd>
+                <dd><a href="Main_new.html">返回</a></dd>
+                <dd><a href="Main_my.html">修改密码</a></dd>
+            </dl>
+        </li>
+    </ul>
+    <div class="layui-row">
+        <div class="layui-col-md3">
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">菜单</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="Main_new.html">信息展览馆</a></dd>
+                        <dd><a href="talk.html">互助咨询</a></dd>
+                        <dd><a href="Main_re.html">休息一下</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">其他</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="Main_b.html">建议分布</a></dd>
+                        <dd><a href="Main.html">社区建议箱</a></dd>
+                        <dd><a href="introduce.html">社区建议展览</a> </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="ceshi4.html">垃圾自动分类</a></li>
+                <li class="layui-nav-item"><a href="Main_email.html">客服邮箱</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="layui-col-md9">
+                <form class="layui-form" action="/tomcat-damo1/addMainInf" method="get">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" >楼编号:</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="number" name="number" required  lay-verify="required" placeholder="请输入房子的楼编号" autocomplete="blbloff" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">楼层号:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="lcofhome" name="lcofhome" required lay-verify="required" placeholder="请输入房子的楼层号" autocomplete="blbloff" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">-_-</div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">门洞号:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="mofhome" name="mofhome" required lay-verify="required" placeholder="请输入房子的门洞号" autocomplete="blbloff" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">-_-</div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">户型:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="hofhome" name="hofhome" required lay-verify="required" placeholder="请输入房子的户型" autocomplete="blbloff" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">-_-</div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">朝向:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="cofhome" name="cofhome" required lay-verify="required" placeholder="请输入房子的朝向" autocomplete="blbloff" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">-_-</div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">平米单价:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="singlemoney" name="singlemoney" required lay-verify="required" placeholder="请输入每平方米单价" autocomplete="blbloff" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">单位:元</div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">面积:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="sofhome" name="sofhome" required lay-verify="required" placeholder="请输入楼房的面积" autocomplete="blbloff" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">单位:</div>
+                    </div>
+
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">详细描述</label>
+                        <div class="layui-input-block">
+                            <textarea  id="description" name="description" placeholder="请输入内容" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="loading-screen" style="height: 100%;width: 100%;"></div>
+<div class="loading-screen" style="height: 100%;width: 100%;"></div>
+<div class="loading-screen" style="height: 100%;width: 100%;"></div>
+<div class="loading-screen" style="height: 100%;width: 100%;"></div>
+</div>
+<script src="axios.js"></script>
+<script>
+
+</script>
+</body>
+</html>
