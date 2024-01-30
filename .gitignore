@@ -1,0 +1,6 @@
+tomcat-damo1/src/main/webapp/layui/*
+tomcat-damo1/src/main/webapp/vue/*
+tomcat-damo1/src/main/webapp/echarts.js
+tomcat-damo1/src/main/webapp/axios.js
+target/classes/*
+tomcat-damo1/target/*
